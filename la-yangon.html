@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Display</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #f7f9fc;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .time-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+        .time {
+            font-size: 1.8em;
+            margin: 10px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        .time-container:hover {
+            animation: pulse 2s infinite;
+        }
+        footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.8em;
+            color: #f0f0f0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Current Time</h1>
+    <div class="time-container">
+        <div class="time" id="la-time">Local Time: Loading...</div>
+        <div class="time" id="yangon-time">Yangon Time: Loading...</div>
+    </div>
+    <footer>Designed with ❤ by [Your Name]</footer>
+    <script>
+        function updateTime() {
+            const laTimeElem = document.getElementById('la-time');
+            const yangonTimeElem = document.getElementById('yangon-time');
+
+            const now = new Date();
+
+            // Local time
+            const laOffset = 8 * 60 * 60 * 1000;
+            const laTime = new Date(now.getTime() + (laOffset - now.getTimezoneOffset() * 60 * 1000));
+            laTimeElem.textContent = `Los Angeles Time: ${laTime.toLocaleTimeString('en-US', { hour12: true })}`;
+
+            // Yangon time (UTC+6:30)
+            const yangonOffset = 6.5 * 60 * 60 * 1000;
+            const yangonTime = new Date(now.getTime() + (yangonOffset + now.getTimezoneOffset() * 60 * 1000));
+            yangonTimeElem.textContent = `Yangon Time: ${yangonTime.toLocaleTimeString('en-US', { hour12: true })}`;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
