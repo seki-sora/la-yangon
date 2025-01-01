@@ -85,7 +85,7 @@
             // Local time
             const laOffset = 8 * 60 * 60 * 1000;
             const laTime = new Date(now.getTime() + (laOffset - now.getTimezoneOffset() * 60 * 1000));
-            laTimeElem.textContent = `Los Angeles Time: ${laTime.toLocaleTimeString('en-US', { hour12: true })}`;
+            laTimeElem.textContent = `LA Time: ${laTime.toLocaleTimeString('en-US', { hour12: true })}`;
 
             // Yangon time (UTC+6:30)
             const yangonOffset = 6.5 * 60 * 60 * 1000;
